@@ -1,4 +1,3 @@
-
 import React, { useRef, useState } from "react";
 import vinith from "/assets/vinithPhoto.jpeg";
 import { FaCloudDownloadAlt } from "react-icons/fa";
@@ -17,8 +16,9 @@ import Projects2 from "./Projects2";
 import Projects3 from "./Projects3";
 import Projects4 from "./Projects4";
 import Education from "./Education";
+
 const Home = () => {
-  const [isOpen, setIsOpen] =useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const aboutRef = useRef(null);
   const skillRef = useRef(null);
   const projectRef = useRef(null);
@@ -27,11 +27,13 @@ const Home = () => {
 
   const scrollToSection = (ref) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
+    setIsOpen(false); // Close menu after clicking a section in mobile
   };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center">
       {/* Navbar */}
-     <nav className="bg-white shadow-md p-4 w-full flex justify-between items-center">
+      <nav className="bg-white shadow-md p-4 w-full flex justify-between items-center">
         {/* Left Section */}
         <div className="flex items-center gap-2 md:gap-4">
           <img src={vinith} alt="Vinith" className="w-12 h-12 rounded-full shadow-md" />
@@ -61,8 +63,8 @@ const Home = () => {
         </button>
       </nav>
 
-        {/* Mobile Menu */}
-       {isOpen && (
+      {/* Mobile Menu */}
+      {isOpen && (
         <ul className="md:hidden flex flex-col items-center space-y-4 mt-4 bg-white shadow-md p-6 w-full text-gray-700 font-medium absolute top-16 left-0">
           <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(aboutRef)}>About</li>
           <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(skillRef)}>Skills</li>
