@@ -195,7 +195,7 @@ const Home = () => {
             </p>
             <p className="flex">
               <strong className="w-32">Location:</strong> Coimbatore, Tamil
-              Nadu, India
+              Nadu
             </p>
           </div>
         </div>
