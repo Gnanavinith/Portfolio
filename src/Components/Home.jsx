@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import vinith from "/assets/vinithPhoto.jpeg";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import resume from "/assets/Resume.pdf";
@@ -9,6 +10,7 @@ import { FaFacebook } from "react-icons/fa";
 import { LuProjector } from "react-icons/lu";
 import { FaLaptopCode } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
+import { FiMenu, FiX } from "react-icons/fi";
 
 import Projects from "./Projects";
 import Projects2 from "./Projects2";
@@ -16,6 +18,7 @@ import Projects3 from "./Projects3";
 import Projects4 from "./Projects4";
 import Education from "./Education";
 const Home = () => {
+  const [isOpen, setIsOpen] =useState(false);
   const aboutRef = useRef(null);
   const skillRef = useRef(null);
   const projectRef = useRef(null);
@@ -28,50 +31,51 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center">
       {/* Navbar */}
-      <nav className="bg-white shadow-md p-4 w-full flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0">
-        <div className="flex items-center space-x-4">
-          <img
-            src={vinith}
-            alt="Vinith"
-            className="w-12 h-12 rounded-full shadow-md"
-          />
+     <nav className="bg-white shadow-md p-4 w-full flex justify-between items-center">
+        {/* Left Section */}
+        <div className="flex items-center gap-2 md:gap-4">
+          <img src={vinith} alt="Vinith" className="w-12 h-12 rounded-full shadow-md" />
           <span className="text-lg font-bold text-gray-800">Hai There 🖐</span>
         </div>
 
-        <ul className="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0 text-gray-700 font-medium">
-          <li
-            className="hover:text-blue-500 cursor-pointer"
-            onClick={() => scrollToSection(aboutRef)}
-          >
-            About
-          </li>
-          <li
-            className="hover:text-blue-500 cursor-pointer"
-            onClick={() => scrollToSection(skillRef)}
-          >
-            Skills
-          </li>
-          <li
-            className="hover:text-blue-500 cursor-pointer"
-            onClick={() => scrollToSection(projectRef)}
-          >
-            Projects
-          </li>
-          <li
-            className="hover:text-blue-500 cursor-pointer"
-            onClick={() => scrollToSection(educationRef)}
-          >
-            Education
-          </li>
+        {/* Hamburger Menu Button */}
+        <div className="md:hidden">
+          {isOpen ? (
+            <FiX size={28} className="cursor-pointer" onClick={() => setIsOpen(false)} />
+          ) : (
+            <FiMenu size={28} className="cursor-pointer" onClick={() => setIsOpen(true)} />
+          )}
+        </div>
+
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex space-x-6 text-gray-700 font-medium">
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(aboutRef)}>About</li>
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(skillRef)}>Skills</li>
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(projectRef)}>Projects</li>
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(educationRef)}>Education</li>
         </ul>
 
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
-          onClick={() => scrollToSection(contactRef)}
-        >
+        {/* Contact Button */}
+        <button className="hidden md:block bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
           Contact me
         </button>
       </nav>
+
+        {/* Mobile Menu */}
+       {isOpen && (
+        <ul className="md:hidden flex flex-col items-center space-y-4 mt-4 bg-white shadow-md p-6 w-full text-gray-700 font-medium absolute top-16 left-0">
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(aboutRef)}>About</li>
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(skillRef)}>Skills</li>
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(projectRef)}>Projects</li>
+          <li className="hover:text-blue-500 cursor-pointer" onClick={() => scrollToSection(educationRef)}>Education</li>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600"
+            onClick={() => scrollToSection(contactRef)}
+          >
+            Contact me
+          </button>
+        </ul>
+      )}
 
       {/* Main Content */}
       <header className="group flex flex-col items-center justify-center border-none rounded-2xl w-full md:w-3/4 lg:w-4xl mt-10 md:mt-20 min-h-[60vh] md:min-h-[80vh] shadow-[15px_20px_20px_rgba(0,0,0,0.3),_inset_4px_4px_10px_white] hover:shadow-[inset_5px_5px_10px_rgba(0,0,0,0.3),_inset_-4px_-4px_10px_white] transition-shadow duration-300 p-6 md:p-12">
